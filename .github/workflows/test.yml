@@ -1,0 +1,29 @@
+name: AWS S3 List via OIDC
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # Required for OIDC
+  contents: read
+
+jobs:
+  s3-list:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::148761669562:role/GitHubActions
+          role-session-name: oidc-demo
+        
+
+      - name: Verify identity
+        run: aws sts get-caller-identity
+
+      - name: List S3 buckets
+        run: aws s3 ls
