@@ -18,7 +18,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
-          role-to-assume: arn:aws:iam::198773669562:role/GitHubActions
+          role-to-assume: arn:aws:iam::034703319301:role/GitHubActions
           role-session-name: oidc-demo
         
 
